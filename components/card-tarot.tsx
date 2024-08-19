@@ -1,26 +1,25 @@
 import { Card, Image } from "@nextui-org/react";
-import { CSSProperties } from "react";
+import { CSSProperties, MouseEventHandler } from "react";
 
 type CardTarotTypes = {
   cardStyle?: CSSProperties;
+  onPressCard: () => void;
 };
 
-export const CardTarot = ({ cardStyle }: CardTarotTypes) => {
+export const CardTarot = ({ cardStyle, onPressCard }: CardTarotTypes) => {
   return (
     <Card
       radius="lg"
-      className="border-none"
+      className="border-none z w-fit"
       shadow="sm"
       isPressable
-      onPress={() => console.log("item pressed")}
+      onPress={onPressCard}
       style={cardStyle}
     >
       <Image
         alt="Woman listing to music"
-        className="object-cover" 
-        height={190}
+        className="object-cover"
         src="/Carta.png"
-        width={100}
       />
     </Card>
   );

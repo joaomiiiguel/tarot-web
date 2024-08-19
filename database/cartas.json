@@ -1,0 +1,42 @@
+[
+    {
+        "id": 0,
+        "name": "O Louco",
+        "description": "O Louco é o começo e o fim, o alpha e o omega do tarô. Ele é o viajante eterno, sempre pronto para embarcar em uma nova aventura com um espírito leve e aberto. O Louco é o vento que sopra para onde quer que queira, trazendo consigo a promessa de novos começos e a excitante incerteza do desconhecido.<br/><br/> Em uma leitura terapêutica, O Louco é um convite para que você se desapegue das limitações que a vida impôs sobre você. Ele te encoraja a abraçar o desconhecido com o coração aberto e uma mente curiosa, para encontrar alegria e aprendizado em todas as experiências, mesmo as mais desafiadoras. O Louco te chama para a jornada, uma que não é sempre linear, mas cheia de reviravoltas e surpresas. Ele pede que você acredite em si mesmo, em seu poder interior e em sua intuição. Ele te convida a sair da sua zona de conforto e a abraçar a mudança, por mais assustadora que possa parecer. Ele te diz: 'Não tenha medo de errar. Cada passo em falso é uma chance para aprender, crescer e se tornar mais forte. Em cada erro, em cada queda, há uma lição a ser aprendida. Não tenha medo de se arriscar, de sonhar grande, de voar alto. Porque é na incerteza e na aventura que encontramos a nós mesmos e descobrimos o que realmente somos capazes de fazer.'Então, meu querido amigo, aceite o convite do Louco. Pegue essa mochila de sonhos, esperanças e medos, e dê o salto. A jornada pode ser incerta, o caminho pode ser sinuoso, mas as recompensas são inestimáveis. Lembre-se, você tem a força, a coragem e a sabedoria para enfrentar qualquer coisa que venha pela frente. Abrace a aventura, celebre o desconhecido e permita que o Louco te guie em sua jornada de autodescoberta e crescimento."
+    },
+    {
+        "id": 1,
+        "name": "O Mago",
+        "description": "O Mago simboliza habilidades, ação e poder de criação."
+    },
+    {
+        "id": 2,
+        "name": "A Papisa",
+        "description": "A Papisa representa intuição, conhecimento secreto e mistério."
+    },
+    {
+        "id": 3,
+        "name": "A Imperatriz",
+        "description": "A Imperatriz é símbolo de abundância, maternidade e criação."
+    },
+    {
+        "id": 4,
+        "name": "O Imperador",
+        "description": "O Imperador representa autoridade, estrutura e poder masculino."
+    },
+    {
+        "id": 5,
+        "name": "O Papa",
+        "description": "O Papa é um símbolo de tradição, ensinamentos espirituais e sabedoria."
+    },
+    {
+        "id": 6,
+        "name": "Os Enamorados",
+        "description": "Os Enamorados simbolizam escolhas, relacionamentos e harmonia."
+    },
+    {
+        "id": 7,
+        "name": "A Carruagem",
+        "description": "A Carruagem representa"
+    }
+]
