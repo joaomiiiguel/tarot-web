@@ -43,7 +43,7 @@ export const TarotOnline = () => {
   const [resultTarot, setResultTarot] = useState<CardType | undefined>(
     undefined
   );
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
 
   const handleMouseEnter = (item: number) => setHovered(item);
 
@@ -195,6 +195,12 @@ export const TarotOnline = () => {
       <Modal
         isOpen={isOpen}
         onOpenChange={onOpenChange}
+        onClose={() => {
+          onClose(),
+            setStep(1),
+            setCardMaiorSelected(undefined),
+            setCardMenorSelected(undefined);
+        }}
         size="5xl"
         className="bg-primary text-secondary"
         scrollBehavior="inside"
@@ -202,53 +208,56 @@ export const TarotOnline = () => {
         style={{ zIndex: 100 }}
       >
         <ModalContent>
-          <ModalHeader>
-            <div className="w-full py-2 items-center justify-center  bg-secondary rounded">
-              <p className="text-primary uppercase font-bold text-center">
-                Resultado Calcuradora Tarot
-              </p>
-            </div>
-          </ModalHeader>
-          <>
-            <ModalBody className="flex flex-col justify-between align-center">
-              <p className="text-secondary font-bold text-center">
-                {nameUser}, sua escolha foi:
-              </p>
-              <div className="flex flex-row justify-around align-center">
-                <div className="flex flex-col justify-center align-center">
-                  <p className="text-secondary font-bold text-center">
-                    {cardMaiorSelected?.name}
-                  </p>
-                  <Image
-                    alt="Woman listing to music"
-                    className="object-cover w-[150px] border-4	border-secondary"
-                    src={`/deck/${cardMaiorSelected?.id}.jpg` ?? "/carta1.png"}
-                  />
-                </div>
-                <div className="flex flex-col justify-center align-top">
-                  <p className="text-secondary font-bold text-center">
-                    {cardMenorSelected?.name}
-                  </p>
-                  <Image
-                    alt="Woman listing to music"
-                    className="object-cover w-[150px] border-4	border-secondary"
-                    src={`/deck/${cardMenorSelected?.id}.jpg`}
-                  />
-                </div>
+          {() => (
+            <>
+              <div className="w-full py-2 items-center justify-center  bg-secondary rounded">
+                <p className="text-primary uppercase font-bold text-center">
+                  Resultado Calcuradora Tarot
+                </p>
               </div>
-              <div className="flex flex-col w-5/6 mx-auto h-60 overscroll-contain">
-                <p className="text-justify">{resultTarot?.description}</p>
-              </div>
-            </ModalBody>
-            <ModalFooter className="w-2/3 mx-auto my-4 py-2 items-center justify-center  bg-secondary rounded">
-              <p className="text-primary">
-                Saiba mais sobre as cartas de tarot e suas combinações:{" "}
-              </p>
-              <Button color="primary" onPress={() => router.push("/service")}>
-                Combinações
-              </Button>
-            </ModalFooter>
-          </>
+
+              <ModalBody className="flex flex-col justify-between align-center">
+                <p className="text-secondary font-bold text-center">
+                  {nameUser}, sua escolha foi:
+                </p>
+                <div className="flex flex-row justify-around align-center">
+                  <div className="flex flex-col justify-center align-center">
+                    <p className="text-secondary font-bold text-center">
+                      {cardMaiorSelected?.name}
+                    </p>
+                    <Image
+                      alt="Woman listing to music"
+                      className="object-cover w-[150px] border-4	border-secondary"
+                      src={
+                        `/deck/${cardMaiorSelected?.id}.jpg` ?? "/carta1.png"
+                      }
+                    />
+                  </div>
+                  <div className="flex flex-col justify-center align-top">
+                    <p className="text-secondary font-bold text-center">
+                      {cardMenorSelected?.name}
+                    </p>
+                    <Image
+                      alt="Woman listing to music"
+                      className="object-cover w-[150px] border-4	border-secondary"
+                      src={`/deck/${cardMenorSelected?.id}.jpg`}
+                    />
+                  </div>
+                </div>
+                <div className="flex flex-col w-5/6 mx-auto h-60 overscroll-contain">
+                  <p className="text-justify">{resultTarot?.description}</p>
+                </div>
+              </ModalBody>
+              <ModalFooter className="w-2/3 mx-auto my-4 py-2 items-center justify-center  bg-secondary rounded">
+                <p className="text-primary">
+                  Saiba mais sobre as cartas de tarot e suas combinações:{" "}
+                </p>
+                <Button color="primary" onPress={() => router.push("/service")}>
+                  Combinações
+                </Button>
+              </ModalFooter>
+            </>
+          )}
         </ModalContent>
       </Modal>
     </div>
