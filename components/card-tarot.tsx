@@ -3,16 +3,17 @@ import { CSSProperties, MouseEventHandler } from "react";
 
 type CardTarotTypes = {
   cardStyle?: CSSProperties;
+  disabled?: boolean
   onPressCard: () => void;
 };
 
-export const CardTarot = ({ cardStyle, onPressCard }: CardTarotTypes) => {
+export const CardTarot = ({ cardStyle, disabled, onPressCard }: CardTarotTypes) => {
   return (
     <Card
       radius="lg"
       className="border-none z w-fit"
       shadow="sm"
-      isPressable
+      isPressable={!disabled}
       onPress={onPressCard}
       style={cardStyle}
     >

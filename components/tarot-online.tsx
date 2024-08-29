@@ -14,51 +14,83 @@ import {
 } from "@nextui-org/react";
 import { CardTarot } from "./card-tarot";
 
+import deckTarot from "./../database/cartas.json";
+import { useRouter } from "next/navigation";
+
+interface CardType {
+  id: string;
+  name: string;
+  description: string;
+}
+
 export const TarotOnline = () => {
+  const router = useRouter();
   const [step, setStep] = useState<number>(1);
   const [nameUser, setName] = useState<string | undefined>(undefined);
-  const [cardSelected, setCardSelected] = useState<number | undefined>(
+  const [isInvalidBtn, setIsInvalidBtn] = useState<boolean>(false);
+
+  const [hovered, setHovered] = useState<null | number>(null);
+
+  const numbersMaior = Array.from({ length: 21 }, (_, index) => index + 1);
+  const numbersMenor = Array.from({ length: 56 }, (_, index) => index + 1);
+
+  const [cardMaiorSelected, setCardMaiorSelected] = useState<
+    CardType | undefined
+  >(undefined);
+  const [cardMenorSelected, setCardMenorSelected] = useState<
+    CardType | undefined
+  >(undefined);
+  const [resultTarot, setResultTarot] = useState<CardType | undefined>(
     undefined
   );
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
-  const [hovered, setHovered] = useState<null | number>(null);
-
   const handleMouseEnter = (item: number) => setHovered(item);
 
-  const handleSelectedCard = (item: number) => {
-    onOpen();
-    const number = Math.floor(Math.random() * 20) + 1;
+  const handleSelectedMaiorCard = (item: number) => {
+    const number = Math.floor(Math.random() * 22);
     console.log("Carta Selecionada:", number);
-    setCardSelected(number);
+    setCardMaiorSelected(deckTarot[number]);
+    setStep(3);
+  };
+  const handleSelectedMenorCard = async (item: number) => {
+    const numeroAleatorio = Math.floor(Math.random() * (55 - 22 + 1)) + 22;
+    console.log("Carta Selecionada:", numeroAleatorio);
+    setCardMenorSelected(deckTarot[numeroAleatorio]);
+
+    const result = `${cardMaiorSelected?.id}_${deckTarot[numeroAleatorio]?.id}`;
+
+    console.log(result);
+
+    const selected = deckTarot.filter((item: CardType) => item.id === result);
+
+    setResultTarot(await selected[0]);
+
+    onOpen();
   };
 
   const handleMouseLeave = () => setHovered(null);
 
-  useEffect(() => {}, [cardSelected]);
+  useEffect(() => {}, [cardMaiorSelected, cardMenorSelected, resultTarot]);
 
   return (
-    <div className="flex flex-col w-full h-[70vh] bg-secondary rounded">
-      {/* <div className="w-full h-fit items-center justify-center  bg-primary rounded">
-        <div className="flex justify-center flex-row gap-5 items-center py-3">
-          <div className="bg-secondary flex items-center justify-center rounded-full w-8 h-8">
-            1
-          </div>
-          <div className="bg-secondary flex items-center justify-center rounded-full w-8 h-8">
-            2
-          </div>
-          <div className="bg-secondary flex items-center justify-center rounded-full w-8 h-8">
-            3
-          </div>
-        </div>
-      </div> */}
+    <div className="flex flex-col w-full min-h-[70vh] bg-secondary rounded pb-4">
       <div className="w-full py-2 items-center justify-center  bg-primary rounded">
-        <p className="text-secondary uppercase font-bold text-center">Tarot do dia</p>
+        <p className="text-secondary uppercase font-bold text-center">
+          Calculadora Tarot
+        </p>
       </div>
+
+      {step > 1 && (
+        <div className="flex-row gap-8 flex items-center justify-around mt-6 w-1/2 mx-auto">
+          <p>Arcana Maior:{cardMaiorSelected?.name}</p>
+          <p>Arcana Menor:{cardMenorSelected?.name}</p>
+        </div>
+      )}
 
       {step === 1 ? (
         <div className="flex-1 flex-col gap-8 flex items-center justify-center mb-16">
-          <div className="flex flex-col items-center justify-between w-1/3 mt-20 mb-4">
+          <div className="flex flex-col items-center justify-between w-1/3 mb-4">
             <Input
               value={nameUser}
               onChange={(e) => setName(e.target.value)}
@@ -66,14 +98,18 @@ export const TarotOnline = () => {
               variant="underlined"
               type="name"
               placeholder="Digite seu nome"
+              isInvalid={isInvalidBtn}
+              errorMessage="É necessário seu nome para avançar"
             />
             <Button
               color="primary"
               className="w-full font-semibold mt-16"
               onClick={() => {
-                setStep(2);
+                if (nameUser === undefined) {
+                  setIsInvalidBtn(true);
+                } else setStep(2);
               }}
-              disabled={nameUser === undefined}
+              // disabled={nameUser === undefined}
             >
               Embaralhar Cartas
             </Button>
@@ -89,12 +125,9 @@ export const TarotOnline = () => {
         </div>
       ) : step === 2 ? (
         <div className="flex-col gap-8 flex items-center justify-between w-full mt-16">
-          <p>Escolha sua carta:</p>
+          <p>Escolha sua carta de arcana maior:</p>
           <div className="flex flex-row relative justify-center w-full ">
-            {[
-              1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-              20, 21,
-            ].map((item) => (
+            {numbersMaior.map((item) => (
               <div
                 key={item}
                 onMouseEnter={() => handleMouseEnter(item)}
@@ -102,7 +135,8 @@ export const TarotOnline = () => {
               >
                 <CardTarot
                   key={item}
-                  onPressCard={() => handleSelectedCard(item)}
+                  onPressCard={() => handleSelectedMaiorCard(item)}
+                  disabled={cardMaiorSelected !== undefined}
                   cardStyle={{
                     position: "absolute",
                     transition: "transform 0.5s",
@@ -111,7 +145,7 @@ export const TarotOnline = () => {
                     width: 110,
                     left: item * 40,
                     transform:
-                      hovered === item
+                      cardMaiorSelected === undefined && hovered === item
                         ? "translateY(-10px)"
                         : "translateY(0px)",
                     boxShadow:
@@ -125,8 +159,36 @@ export const TarotOnline = () => {
           </div>
         </div>
       ) : (
-        <div className="flex-1 flex-col gap-8 flex items-center justify-center mb-16">
-          <p>Step 3</p>
+        <div className="flex-col gap-8 flex items-center justify-between w-full mt-16">
+          <p>Escolha sua carta de arcana menor:</p>
+          <div className="grid px-4 gap-y-4 grid-cols-12 w-full">
+            {numbersMenor.map((item) => (
+              <div
+                key={item}
+                onMouseEnter={() => handleMouseEnter(item)}
+                onMouseLeave={handleMouseLeave}
+              >
+                <CardTarot
+                  key={item}
+                  onPressCard={() => handleSelectedMenorCard(item)}
+                  disabled={cardMenorSelected !== undefined}
+                  cardStyle={{
+                    opacity: cardMenorSelected !== undefined ? 0.2 : 1,
+                    transition: "transform 0.5s",
+                    zIndex: item,
+                    transform:
+                      cardMenorSelected === undefined && hovered === item
+                        ? "translateY(-10px)"
+                        : "translateY(0px)",
+                    boxShadow:
+                      hovered === item
+                        ? "0 8px 16px rgba(0, 0, 0, 0.2)"
+                        : "0 4px 8px rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       )}
 
@@ -137,72 +199,56 @@ export const TarotOnline = () => {
         className="bg-primary text-secondary"
         scrollBehavior="inside"
         isDismissable={false}
+        style={{ zIndex: 100 }}
       >
         <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col gap-1 font-bold">
-                Sua carta de hoje é:
-              </ModalHeader>
-              <ModalBody className="flex flex-row justify-between align-center">
-                <div className="flex flex-col w-1/3 justify-center align-top">
+          <ModalHeader>
+            <div className="w-full py-2 items-center justify-center  bg-secondary rounded">
+              <p className="text-primary uppercase font-bold text-center">
+                Resultado Calcuradora Tarot
+              </p>
+            </div>
+          </ModalHeader>
+          <>
+            <ModalBody className="flex flex-col justify-between align-center">
+              <p className="text-secondary font-bold text-center">
+                {nameUser}, sua escolha foi:
+              </p>
+              <div className="flex flex-row justify-around align-center">
+                <div className="flex flex-col justify-center align-center">
+                  <p className="text-secondary font-bold text-center">
+                    {cardMaiorSelected?.name}
+                  </p>
                   <Image
                     alt="Woman listing to music"
-                    className="object-cover w-[220px]"
-                    src="/carta1.png"
+                    className="object-cover w-[150px] border-4	border-secondary"
+                    src={`/deck/${cardMaiorSelected?.id}.jpg` ?? "/carta1.png"}
                   />
                 </div>
-                <div className="flex flex-col w-full">
-                  <p className="font-semibold mb-2">
-                    {nameUser},
+                <div className="flex flex-col justify-center align-top">
+                  <p className="text-secondary font-bold text-center">
+                    {cardMenorSelected?.name}
                   </p>
-                  <p className="h-60 overscroll-contain">
-                    O Louco é o começo e o fim, o alpha e o omega do tarô. Ele é
-                    o viajante eterno, sempre pronto para embarcar em uma nova
-                    aventura com um espírito leve e aberto. O Louco é o vento
-                    que sopra para onde quer que queira, trazendo consigo a
-                    promessa de novos começos e a excitante incerteza do
-                    desconhecido. Em uma leitura terapêutica, O Louco é um
-                    convite para que você se desapegue das limitações que a vida
-                    impôs sobre você. Ele te encoraja a abraçar o desconhecido
-                    com o coração aberto e uma mente curiosa, para encontrar
-                    alegria e aprendizado em todas as experiências, mesmo as
-                    mais desafiadoras. O Louco te chama para a jornada, uma que
-                    não é sempre linear, mas cheia de reviravoltas e surpresas.
-                    Ele pede que você acredite em si mesmo, em seu poder
-                    interior e em sua intuição. Ele te convida a sair da sua
-                    zona de conforto e a abraçar a mudança, por mais assustadora
-                    que possa parecer. Ele te diz: "Não tenha medo de errar.
-                    Cada passo em falso é uma chance para aprender, crescer e se
-                    tornar mais forte. Em cada erro, em cada queda, há uma lição
-                    a ser aprendida. Não tenha medo de se arriscar, de sonhar
-                    grande, de voar alto. Porque é na incerteza e na aventura
-                    que encontramos a nós mesmos e descobrimos o que realmente
-                    somos capazes de fazer." Então, meu querido amigo, aceite o
-                    convite do Louco. Pegue essa mochila de sonhos, esperanças e
-                    medos, e dê o salto. A jornada pode ser incerta, o caminho
-                    pode ser sinuoso, mas as recompensas são inestimáveis.
-                    Lembre-se, você tem a força, a coragem e a sabedoria para
-                    enfrentar qualquer coisa que venha pela frente. Abrace a
-                    aventura, celebre o desconhecido e permita que o Louco te
-                    guie em sua jornada de autodescoberta e crescimento.
-                  </p>
+                  <Image
+                    alt="Woman listing to music"
+                    className="object-cover w-[150px] border-4	border-secondary"
+                    src={`/deck/${cardMenorSelected?.id}.jpg`}
+                  />
                 </div>
-              </ModalBody>
-              <ModalFooter className="flex items-center mt-5">
-                <p>Saiba mais sobre as cartas de tarot e suas combinações: </p>
-                <Button
-                  color="secondary"
-                  variant="shadow"
-                  onPress={() => {
-                    onClose(), setStep(1);
-                  }}
-                >
-                  Action
-                </Button>
-              </ModalFooter>
-            </>
-          )}
+              </div>
+              <div className="flex flex-col w-5/6 mx-auto h-60 overscroll-contain">
+                <p className="text-justify">{resultTarot?.description}</p>
+              </div>
+            </ModalBody>
+            <ModalFooter className="w-2/3 mx-auto my-4 py-2 items-center justify-center  bg-secondary rounded">
+              <p className="text-primary">
+                Saiba mais sobre as cartas de tarot e suas combinações:{" "}
+              </p>
+              <Button color="primary" onPress={() => router.push("/service")}>
+                Combinações
+              </Button>
+            </ModalFooter>
+          </>
         </ModalContent>
       </Modal>
     </div>
