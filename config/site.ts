@@ -10,15 +10,25 @@ export const siteConfig = {
     },
     {
       label: "SERVIÇOS",
-      href: "/service",
+      href: "/servicos",
+      childrens: [
+        {
+          label: "HOME",
+          href: "/",
+        },
+        {
+          label: "HOME 2",
+          href: "/",
+        },
+      ],
     },
     {
       label: "BLOG",
       href: "/blog",
     },
     {
-      label: "SOBRE",
-      href: "/about",
+      label: "QUEM SOMOS",
+      href: "/quem-somos",
     },
   ],
   navMenuItems: [

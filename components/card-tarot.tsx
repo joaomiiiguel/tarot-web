@@ -10,12 +10,12 @@ type CardTarotTypes = {
 export const CardTarot = ({ cardStyle, disabled, onPressCard }: CardTarotTypes) => {
   return (
     <Card
-      radius="lg"
       className="border-none z w-fit"
-      shadow="sm"
       isPressable={!disabled}
-      onPress={onPressCard}
+      radius="lg"
+      shadow="sm"
       style={cardStyle}
+      onPress={onPressCard}
     >
       <Image
         alt="Woman listing to music"

@@ -1,6 +1,5 @@
 import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
-import { Link } from "@nextui-org/link";
 import clsx from "clsx";
 
 import { Providers } from "./providers";
@@ -8,6 +7,7 @@ import { Providers } from "./providers";
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
+import Footer from "@/components/footer";
 
 export const metadata: Metadata = {
   title: {
@@ -33,34 +33,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html suppressHydrationWarning lang="en">
+    <html suppressHydrationWarning lang="pt">
       <head />
       <body
         className={clsx(
-          "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable
+          "relative min-h-screen bg-background font-sans antialiased bg-fixed bg-cover bg-center bg-repeat before:absolute before:inset-0 before:bg-[url('/backgroundSite.webp')] before:bg-fixed before:bg-center before:opacity-10 before:content-['']",
+          fontSans.variable,
         )}
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-          <div className="relative flex flex-col h-screen w-[80%] m-auto">
+          <div className="relative flex flex-col min-h-screen m-auto ">
             <Navbar />
-            <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
+            <main className="container w-screen mx-0 max-w-7xl pt-2 flex-grow">
               {children}
             </main>
-            <footer className="w-full flex items-center justify-between py-3">
-              <span className="text-default-600 text-xs sm:text-sm">
-                Damanda @ 2024. Todos direitos reservados.
-              </span>
-              <Link
-                isExternal
-                className="flex items-center gap-1 text-current"
-                href="#"
-                title="nextui.org homepage"
-              >
-                <span className="text-default-600 text-xs sm:text-sm">Desenvolvidor por</span>
-                <p className="text-primary text-xs sm:text-sm">Agência Lapê</p>
-              </Link>
-            </footer>
+            <Footer />
           </div>
         </Providers>
       </body>

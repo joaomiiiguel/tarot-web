@@ -74,7 +74,7 @@ export const TarotOnline = () => {
   useEffect(() => {}, [cardMaiorSelected, cardMenorSelected, resultTarot]);
 
   return (
-    <div className="flex flex-col w-full min-h-[70vh] bg-secondary rounded pb-4">
+    <div className="flex flex-col w-[80%] min-h-[70vh] bg-secondary rounded pb-4">
       <div className="w-full py-2 items-center justify-center  bg-primary rounded">
         <p className="text-secondary uppercase font-bold text-center">
           Calculadora Tarot

@@ -1,9 +1,13 @@
-import { title } from "@/components/primitives";
+import { DeckBanner } from "@/components/deck-banner";
 
 export default function BlogPage() {
   return (
-    <div>
-      <h1 className={title()}>Blog</h1>
+    <div className="w-screen">
+      <DeckBanner
+        description="Todos os serviços de Tarot"
+        height={20}
+        title={"Blog"}
+      />
     </div>
   );
 }
