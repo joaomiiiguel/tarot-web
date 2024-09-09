@@ -1,9 +1,11 @@
 "use client";
 
-export default function NumerologiaPage() {
+const NumerologiaPage = () => {
   return (
     <div>
       <p>Numerologia</p>
     </div>
   );
-}
+};
+
+export default NumerologiaPage;

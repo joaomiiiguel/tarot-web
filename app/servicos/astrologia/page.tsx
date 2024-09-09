@@ -2,7 +2,7 @@
 
 import { DeckBanner } from "@/components/deck-banner";
 
-export const AstrologiaPage = () => {
+const AstrologiaPage = () => {
   return (
     <div>
       <DeckBanner
@@ -13,3 +13,5 @@ export const AstrologiaPage = () => {
     </div>
   );
 };
+
+export default AstrologiaPage;
