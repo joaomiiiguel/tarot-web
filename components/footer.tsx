@@ -1,77 +1,85 @@
 import { Icon } from "@iconify/react";
 import { Link } from "@nextui-org/link";
 
+import { siteConfig } from "@/config/site";
+
 const Footer = () => {
   const linksTarot = [
     {
       name: "Tarot do dia",
-      link: "#",
+      link: siteConfig.links.tarotDia,
     },
     {
       name: "Calculadora de Tarot",
-      link: "#",
+      link: siteConfig.links.calcTarot,
     },
     {
       name: "Combinações",
-      link: "#",
+      link: siteConfig.links.combinacoes,
     },
   ];
   const linksAstrologia = [
     {
       name: "Céu do Momento",
-      link: "#",
+      link: siteConfig.links.ceuMomento,
     },
     {
       name: "Calendário Lunar",
-      link: "#",
+      link: siteConfig.links.calendarioLunar,
     },
   ];
   const linksNumerologia = [
     {
       name: "Numerologia do nome",
-      link: "#",
+      link: siteConfig.links.numerologiaNome,
     },
   ];
   const linksLinks = [
     {
       name: "Quem somos",
-      link: "#",
+      link: siteConfig.links.about,
     },
     {
       name: "Política de Privacidade",
-      link: "#",
+      link: siteConfig.links.privacyPolicy,
     },
   ];
 
   return (
-    <footer className="w-[80%] mx-auto flex flex-col items-center justify-between py-10 gap-10">
+    <footer className="w-[80%] mx-auto flex flex-col items-center justify-between py-10 gap-10 border-t-1 border-primary">
       <div className="flex justify-between w-full">
         <div className="flex flex-row gap-10">
           <div>
-            <h4 className="text-lg font-bold">Tarot</h4>
+            <Link href={siteConfig.links.tarotHome}>
+              <h4 className="text-lg font-bold">Tarot</h4>
+            </Link>
             <div className="flex flex-col">
               {linksTarot.map((item) => (
-                <Link key={item.name} href={item.link} target="_blank">
+                <Link key={item.name} href={item.link}>
                   {item.name}
                 </Link>
               ))}
             </div>
           </div>
           <div>
-            <h4 className="text-lg font-bold">Astrologia</h4>
+            <Link href={siteConfig.links.astrologiaHome}>
+              <h4 className="text-lg font-bold">Astrologia</h4>
+            </Link>
             <div className="flex flex-col">
               {linksAstrologia.map((item) => (
-                <Link key={item.name} href={item.link} target="_blank">
+                <Link key={item.name} href={item.link}>
                   {item.name}
                 </Link>
               ))}
             </div>
           </div>
           <div>
-            <h4 className="text-lg font-bold">Numerologia</h4>
+            <Link href={siteConfig.links.numerologiaHome}>
+              <h4 className="text-lg font-bold">Numerologia</h4>
+            </Link>
             <div className="flex flex-col">
               {linksNumerologia.map((item) => (
-                <Link key={item.name} href={item.link} target="_blank">
+                <Link key={item.name} href={item.link}>
                   {item.name}
                 </Link>
               ))}
@@ -81,7 +89,7 @@ const Footer = () => {
             <h4 className="text-lg font-bold">Links</h4>
             <div className="flex flex-col">
               {linksLinks.map((item) => (
-                <Link key={item.name} href={item.link} target="_blank">
+                <Link key={item.name} href={item.link}>
                   {item.name}
                 </Link>
               ))}

@@ -4,9 +4,9 @@ import { DeckBanner } from "@/components/deck-banner";
 
 const AstrologiaPage = () => {
   return (
-    <div>
+    <div className="w-screen">
       <DeckBanner
-        description="Todos os serviços de Astrologia"
+        description="Descubra como os astros influenciam sua vida!"
         height={20}
         title={"Astrologia"}
       />

@@ -30,25 +30,21 @@ export default function ServicePage() {
 
   return (
     <div className="w-screen">
-      <DeckBanner
-        description="Todos os serviços de tarot"
-        height={20}
-        title={"Serviços"}
-      />
-      <div className="w-[80%] mx-auto py-10 grid grid-cols-3 gap-4">
+      <DeckBanner height={20} title={"Serviços"} />
+      <div className="w-[80%] flex flex-row justify-between mx-auto py-10 gap-4">
         {ListService.map((service) => (
           <Link
             key={service.title}
-            className="w-full bg-secondary bg-opacity-60 rounded-lg overflow-hidden text-center hover:bg-opacity-100"
+            className="bg-primary bg-opacity-60 rounded-lg overflow-hidden text-center hover:bg-opacity-100"
             href={service.link}
           >
             <Image
               alt="image tarot"
-              height={200}
+              height={240}
               src={service.img}
-              width={390}
+              width={240}
             />
-            <p className="text-2xl font-bold py-5 uppercase font-customFont">
+            <p className="text-xl text-secondary font-bold py-4 uppercase font-customFont">
               {service.title}
             </p>
           </Link>
