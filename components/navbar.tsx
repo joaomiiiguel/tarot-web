@@ -6,15 +6,12 @@ import {
   NavbarMenuToggle,
   NavbarMenuItem,
 } from "@nextui-org/navbar";
-
 import { Kbd } from "@nextui-org/kbd";
 import { Input } from "@nextui-org/input";
 import { link as linkStyles } from "@nextui-org/theme";
 import NextLink from "next/link";
 import clsx from "clsx";
-
-import { siteConfig } from "@/config/site";
-import { SearchIcon, Logo } from "@/components/icons";
+import { useRouter } from "next/navigation";
 import {
   NavbarBrand,
   NavbarContent,
@@ -24,10 +21,10 @@ import {
   Dropdown,
   DropdownItem,
   DropdownMenu,
-  DropdownTrigger,
 } from "@nextui-org/react";
-import { Icon } from "@iconify/react";
-import { useRouter } from "next/navigation";
+
+import { siteConfig } from "@/config/site";
+import { SearchIcon, Logo } from "@/components/icons";
 
 export const Navbar = () => {
   const router = useRouter();
@@ -36,7 +33,6 @@ export const Navbar = () => {
     <Input
       aria-label="Search"
       classNames={{
-        inputWrapper: "bg-default-100",
         input: "text-sm",
       }}
       endContent={
@@ -80,23 +76,23 @@ export const Navbar = () => {
                 </Button>
               </NavbarItem>
               {item.childrens && (
-            <DropdownMenu
-              aria-label={`Submenu for ${item.label}`}
-              className="w-[340px]"
-              itemClasses={{
-                base: 'gap-4',
-              }}
-            >
-              {item.childrens.map((child) => (
-                <DropdownItem
-                  key={child.href}
-                  onClick={() => router.push(child.href)}
+                <DropdownMenu
+                  aria-label={`Submenu for ${item.label}`}
+                  className="w-[340px]"
+                  itemClasses={{
+                    base: "gap-4",
+                  }}
                 >
-                  {child.label}
-                </DropdownItem>
-              ))}
-            </DropdownMenu>
-          )}
+                  {item.childrens.map((child) => (
+                    <DropdownItem
+                      key={child.href}
+                      onClick={() => router.push(child.href)}
+                    >
+                      {child.label}
+                    </DropdownItem>
+                  ))}
+                </DropdownMenu>
+              )}
             </Dropdown>
           ))}
         </ul>

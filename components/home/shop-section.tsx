@@ -5,7 +5,7 @@ export const ShopSection = () => {
     <div className="flex flex-col gap-5">
       <p className="text-secondary text-2xl font-bold">Shop</p>
 
-      <div className="flex flex-row gap-5">
+      <div className="flex flex-col md:flex-row gap-5">
         {[1, 2, 3, 4, 5].map((item) => (
           <div
             key={item}

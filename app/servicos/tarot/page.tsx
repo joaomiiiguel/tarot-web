@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { DeckBanner } from "@/components/deck-banner";
+import { siteConfig } from "@/config/site";
 
 export default function TarotPage() {
   const ListService = [
@@ -12,21 +13,21 @@ export default function TarotPage() {
       description:
         "Comece seu dia com a orientação espiritual de uma carta do Tarot, escolhida especialmente para você. A leitura traz uma mensagem exclusiva, seja de um arcano maior ou menor, oferecendo insights sobre as energias que cercam seu caminho hoje. Descubra como aproveitar as oportunidades ou enfrentar os desafios que podem surgir ao longo do dia, com reflexões profundas e diretas sobre seu momento atual.",
       img: "/tarot.png",
-      link: "/servicos/tarot/calculadora-tarot",
+      link: siteConfig.links.tarotDia,
     },
     {
       title: "Calculadora de Tarot",
       description:
         "Com a Calculadora Tarot, você pode explorar o impacto combinado de dois arcanos — um maior e um menor — e ver como essas energias se entrelaçam. Escolha uma carta de cada grupo e descubra o que essa combinação específica diz sobre seu futuro, suas decisões e os caminhos que estão se abrindo diante de você. A calculadora oferece uma leitura detalhada e única, decodificando as mensagens que esses arcanos trazem em conjunto, proporcionando uma visão profunda sobre sua jornada pessoal e espiritual.",
       img: "/astrology.png",
-      link: "/servicos/tarot/calculadora-tarot",
+      link: siteConfig.links.calcTarot,
     },
     {
       title: "Combinações",
       description:
         "Mergulhe no universo das combinações de cartas de Tarot e explore o poder das interações entre os arcanos. Neste serviço, você pode selecionar livremente cartas dos arcanos maiores e menores e descobrir o significado por trás de suas escolhas. Cada combinação revela uma sinergia única, destacando conexões ocultas entre as cartas que podem iluminar áreas específicas da sua vida, como amor, trabalho, ou espiritualidade. Ideal para quem busca uma interpretação mais detalhada e personalizada.",
       img: "/numberology.png",
-      link: "/servicos/tarot/calculadora-tarot",
+      link: siteConfig.links.combinacoes,
     },
   ];
 

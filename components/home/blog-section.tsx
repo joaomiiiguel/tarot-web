@@ -7,7 +7,7 @@ export const BlogSection = () => {
         <p className="text-2xl font-bold">Blog</p>
         <Link href={"/blog"}>Ver mais</Link>
       </div>
-      <div className="grid grid-cols-2 gap-5">
+      <div className="md:grid md:grid-cols-2 gap-5 flex flex-col ">
         {[1, 2, 3, 4].map((item) => (
           <div
             key={item}

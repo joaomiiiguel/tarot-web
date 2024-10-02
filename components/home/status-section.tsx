@@ -21,7 +21,7 @@ const StatusSection = () => {
   return (
     <div className="flex flex-col gap-5">
       <p className="text-primary text-2xl font-bold">Nossos Dados</p>
-      <div className="flex justify-around space-x-8">
+      <div className="flex flex-col md:flex-row justify-around gap-8">
         {dados.map((card) => (
           <div
             key={card.name}

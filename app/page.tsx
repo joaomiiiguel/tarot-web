@@ -4,6 +4,8 @@ import ClientsSection from "@/components/home/clients-section";
 import { ShopSection } from "@/components/home/shop-section";
 import StatusSection from "@/components/home/status-section";
 import { PrimaryMenuList } from "@/components/primary-menu";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 export default function Home() {
   return (

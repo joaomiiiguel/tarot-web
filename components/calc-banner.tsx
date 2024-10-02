@@ -8,7 +8,7 @@ export const CalcTarotBanner = () => {
   const router = useRouter();
 
   return (
-    <div className="flex justify-between items-stretch w-full min-h-[30vh]">
+    <div className="flex flex-col md:flex-row justify-between items-stretch w-full min-h-[30vh] pt-5">
       <div className="flex flex-col justify-center items-start">
         <p className="font-bold text-3xl text-secondary">
           Calcuradora de Tarot
