@@ -1,10 +1,11 @@
 "use client";
 
-import { siteConfig } from "@/config/site";
 import { Button } from "@nextui-org/button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Slider from "react-slick";
+
+import { siteConfig } from "@/config/site";
 
 export const PrimaryMenuList = () => {
   const router = useRouter();
@@ -72,7 +73,13 @@ export const PrimaryMenuList = () => {
           <div key={item.name} className="p-4">
             <div className="flex flex-col items-center justify-around bg-primary text-secondary rounded-lg uppercase font-bold p-4 text-center">
               <p className="font-customFont">{item.name}</p>
-              <Image alt={item.name} height={68} src={item.icon} width={98} />
+              <Image
+                alt={item.name}
+                height={68}
+                src={item.icon}
+                width={98}
+                style={{ margin: "10px 0px" }}
+              />
               <Button
                 fullWidth
                 className="text-secondary font-bold"

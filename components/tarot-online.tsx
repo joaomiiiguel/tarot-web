@@ -1,21 +1,20 @@
 "use client";
 
-import { SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "@nextui-org/input";
 import { Button } from "@nextui-org/button";
 import {
   Image,
   Modal,
   ModalContent,
-  ModalHeader,
   ModalBody,
   ModalFooter,
   useDisclosure,
 } from "@nextui-org/react";
-import { CardTarot } from "./card-tarot";
-
-import deckTarot from "./../database/cartas.json";
 import { useRouter } from "next/navigation";
+
+import { CardTarot } from "./card-tarot";
+import deckTarot from "./../database/cartas.json";
 
 interface CardType {
   id: string;
@@ -41,7 +40,7 @@ export const TarotOnline = () => {
     CardType | undefined
   >(undefined);
   const [resultTarot, setResultTarot] = useState<CardType | undefined>(
-    undefined
+    undefined,
   );
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
 
@@ -49,12 +48,14 @@ export const TarotOnline = () => {
 
   const handleSelectedMaiorCard = (item: number) => {
     const number = Math.floor(Math.random() * 22);
+
     console.log("Carta Selecionada:", number);
     setCardMaiorSelected(deckTarot[number]);
     setStep(3);
   };
   const handleSelectedMenorCard = async (item: number) => {
     const numeroAleatorio = Math.floor(Math.random() * (55 - 22 + 1)) + 22;
+
     console.log("Carta Selecionada:", numeroAleatorio);
     setCardMenorSelected(deckTarot[numeroAleatorio]);
 
@@ -92,18 +93,18 @@ export const TarotOnline = () => {
         <div className="flex-1 flex-col gap-8 flex items-center justify-center mb-16">
           <div className="flex flex-col items-center justify-between w-1/3 mb-4">
             <Input
-              value={nameUser}
-              onChange={(e) => setName(e.target.value)}
               color="primary"
-              variant="underlined"
-              type="name"
-              placeholder="Digite seu nome"
-              isInvalid={isInvalidBtn}
               errorMessage="É necessário seu nome para avançar"
+              isInvalid={isInvalidBtn}
+              placeholder="Digite seu nome"
+              type="name"
+              value={nameUser}
+              variant="underlined"
+              onChange={(e) => setName(e.target.value)}
             />
             <Button
-              color="primary"
               className="w-full font-semibold mt-16"
+              color="primary"
               onClick={() => {
                 if (nameUser === undefined) {
                   setIsInvalidBtn(true);
@@ -135,8 +136,6 @@ export const TarotOnline = () => {
               >
                 <CardTarot
                   key={item}
-                  onPressCard={() => handleSelectedMaiorCard(item)}
-                  disabled={cardMaiorSelected !== undefined}
                   cardStyle={{
                     position: "absolute",
                     transition: "transform 0.5s",
@@ -153,6 +152,8 @@ export const TarotOnline = () => {
                         ? "0 8px 16px rgba(0, 0, 0, 0.2)"
                         : "0 4px 8px rgba(0, 0, 0, 0.1)",
                   }}
+                  disabled={cardMaiorSelected !== undefined}
+                  onPressCard={() => handleSelectedMaiorCard(item)}
                 />
               </div>
             ))}
@@ -170,8 +171,6 @@ export const TarotOnline = () => {
               >
                 <CardTarot
                   key={item}
-                  onPressCard={() => handleSelectedMenorCard(item)}
-                  disabled={cardMenorSelected !== undefined}
                   cardStyle={{
                     opacity: cardMenorSelected !== undefined ? 0.2 : 1,
                     transition: "transform 0.5s",
@@ -185,6 +184,8 @@ export const TarotOnline = () => {
                         ? "0 8px 16px rgba(0, 0, 0, 0.2)"
                         : "0 4px 8px rgba(0, 0, 0, 0.1)",
                   }}
+                  disabled={cardMenorSelected !== undefined}
+                  onPressCard={() => handleSelectedMenorCard(item)}
                 />
               </div>
             ))}
@@ -193,19 +194,19 @@ export const TarotOnline = () => {
       )}
 
       <Modal
+        className="bg-primary text-secondary"
+        isDismissable={false}
         isOpen={isOpen}
-        onOpenChange={onOpenChange}
+        scrollBehavior="inside"
+        size="5xl"
+        style={{ zIndex: 100 }}
         onClose={() => {
           onClose(),
             setStep(1),
             setCardMaiorSelected(undefined),
             setCardMenorSelected(undefined);
         }}
-        size="5xl"
-        className="bg-primary text-secondary"
-        scrollBehavior="inside"
-        isDismissable={false}
-        style={{ zIndex: 100 }}
+        onOpenChange={onOpenChange}
       >
         <ModalContent>
           {() => (
