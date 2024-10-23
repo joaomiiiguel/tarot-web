@@ -8,3 +8,26 @@
   font-weight: normal;
   font-style: normal;
 }
+
+
+.calendar-table {
+  width: 90%;
+  border-collapse: collapse;
+}
+
+.calendar-table td {
+  padding: 8px 0.8vw;
+
+  text-align: center;
+}
+
+.calendar-table th {
+  width: 100%;
+  background-color: #ab7eb7;
+  color: white;
+}
+
+.calendar-table tr:nth-child(even) {
+  background-color: #f2f2f236;
+}
+

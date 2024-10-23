@@ -105,12 +105,12 @@ export const TarotOnline = () => {
             <Button
               className="w-full font-semibold mt-16"
               color="primary"
+              isDisabled={nameUser === undefined}
               onClick={() => {
                 if (nameUser === undefined) {
                   setIsInvalidBtn(true);
                 } else setStep(2);
               }}
-              // disabled={nameUser === undefined}
             >
               Embaralhar Cartas
             </Button>

@@ -30,6 +30,10 @@ module.exports = {
             foreground: "#FFD0F7",
             DEFAULT: "#321A3E",
           },
+          disabled: {
+            background: "#2D2733", // cor para o fundo de elementos desabilitados
+            foreground: "#6E6278", // cor para o texto ou bordas desabilitadas
+          },
         },
       }
     }
